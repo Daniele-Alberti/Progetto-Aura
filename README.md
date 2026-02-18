@@ -30,7 +30,7 @@ Sensore Arduino → Arduino Ricevente → Motore
 ## Funzionamento
 
 1. Il primo Arduino legge continuamente i dati dal sensore
-2. I dati vengono trasmessi al secondo Arduino tramite comunicazione seriale/wireless
+2. I dati vengono trasmessi al secondo Arduino tramite comunicazione seriale
 3. Il secondo Arduino aziona il motore in base ai valori ricevuti
 4. Python intercetta i dati e li salva in formato JSON
 5. L'interfaccia HTML legge il file JSON e visualizza i dati in tempo reale
