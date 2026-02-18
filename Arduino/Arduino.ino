@@ -21,8 +21,9 @@ void setup() {
 
 void loop() {
   PacchettoSensore p;
-
   int valore = analogRead(A0);
 
+  p={ID, MITTENTE, DESTINATARIO, TIPO, valore, VUOTO};
+  Serial.print(p);
   delay(1000);
 }
