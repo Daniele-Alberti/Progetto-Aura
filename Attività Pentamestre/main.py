@@ -23,9 +23,9 @@ chiusuraHtml = """
 """
 
 if __name__ == "__main__":
-    file = open("index.html", "w")
-    dato1 = f"<tr><td>2024-06-01 12:00:00</td><td>{n1}</td></tr>\n"
-    dato2 = f"<tr><td>2024-06-01 12:01:00</td><td>{n2}</td></tr>\n"
-    stringagrossa = intestazioneHtml + dato1 + dato2 + chiusuraHtml
+    file = open("Attività Pentamestre/index.html", "w")
+    dato1 = f"\t\t\t<tr><td>2024-06-01 12:00:00</td><td>{n1}</td></tr>"
+    dato2 = f"\t\t\t<tr><td>2024-06-01 12:01:00</td><td>{n2}</td></tr>"
+    stringagrossa = intestazioneHtml + dato1 + "\n" + dato2 + chiusuraHtml
     file.write(stringagrossa)
     file.close()
