@@ -1,6 +1,7 @@
 import serial
 import struct
 import datetime as dt
+import json
 
 arduino = serial.Serial("COM4", 9600)
 
@@ -28,6 +29,7 @@ if __name__ == "__main__":
     while True:
         seriale = arduino.read(32)
         dati = struct.unpack("2s 4s 4s 2s 4s 16s", seriale)
+        #print(dati)
 
         id = dati[0].decode()
         mittente = dati[1].decode()
@@ -43,8 +45,14 @@ if __name__ == "__main__":
         print(f"valore sensore: {valoreSensore}")
         print(f"vuoto: {vuoto}")
 
-        file = open("Attività Pentamestre/index.html", "w")
+        data_json = {"data": str(dt.datetime.now()), "valore": valoreSensore}
+
+        with open("db.json", "a") as json_file:
+            json_file.write(json.dumps(data_json) + "\n")
+        json_file.close()
+
+        html = open("index.html", "w")
         dato = f"\t\t\t<tr><td>{dt.datetime.now()}</td><td>{valoreSensore}</td></tr>"
         stringagrossa = intestazioneHtml + dato + chiusuraHtml
-        file.write(stringagrossa)
-        file.close()
+        html.write(stringagrossa)
+        html.close()
