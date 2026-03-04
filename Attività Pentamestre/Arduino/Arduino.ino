@@ -1,4 +1,5 @@
-struct PacchettoSensore {
+struct PacchettoSensore 
+{
   char id[2];
   char mittente[4];
   char destinatario[4];
@@ -7,23 +8,33 @@ struct PacchettoSensore {
   char vuoto[16];
 };
 
-void setup() {
-  #define ID = "AB"
-  #define MITTENTE = "P001"
-  #define DESTINATARIO = "P002"
-  #define TIPO = "S1"
-  #define VUOTO = "----------------"
-  
-  pinMode(A0, INPUT);
+const char ID[] = "AB";
+const char MITTENTE[] = "P001";
+const char DESTINATARIO[] = "P002";
+const char TIPO[] = "S1";
+const char VUOTO[] = "----------------";
 
+void setup() 
+{
+  pinMode(A0, INPUT);
   Serial.begin(9600);
 }
 
-void loop() {
+void loop() 
+{
   PacchettoSensore p;
+
   int valore = analogRead(A0);
 
-  p={ID, MITTENTE, DESTINATARIO, TIPO, valore, VUOTO};
-  Serial.print(p);
+  memcpy(p.id, ID, 2);
+  memcpy(p.mittente, MITTENTE, 4);
+  memcpy(p.destinatario, DESTINATARIO, 4);
+  memcpy(p.tipo, TIPO, 2);
+  memcpy(p.vuoto, VUOTO, 16);
+
+  sprintf(p.valoreSensore, "%04d", valore);
+
+  Serial.write((byte*)&p, sizeof(p));
+
   delay(1000);
 }
